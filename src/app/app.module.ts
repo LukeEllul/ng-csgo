@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { InMemoryCache } from '@apollo/client/core';
+import { InMemoryCache, split } from '@apollo/client/core';
 import { StoreModule } from '@ngrx/store';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { AppComponent } from './app.component';
 
 import * as store from './shared/data-access/store';
 import { EffectsModule } from '@ngrx/effects';
+import { getMainDefinition } from '@apollo/client/utilities';
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,12 +22,38 @@ import { EffectsModule } from '@ngrx/effects';
         {
             provide: APOLLO_OPTIONS,
             useFactory: (httpLink: HttpLink) => {
+                const http = httpLink.create({
+                    uri: 'https://api-staging.csgoroll.com/graphql',
+                    withCredentials: true
+                });
+
+                const ws = new WebSocketLink({
+                    uri: 'ws://api-staging.csgoroll.com/graphql',
+                    options: {
+                        reconnect: true,
+                        connectionParams: {
+                            credentials: 'include'
+                        }
+                    }
+                });
+
+                const link = split(
+                    ({ query }) => {
+                        const { kind, operation } = getMainDefinition(
+                            query
+                        ) as any;
+                        return (
+                            kind === 'OperationDefinition' &&
+                            operation === 'subscription'
+                        );
+                    },
+                    ws,
+                    http
+                );
+
                 return {
                     cache: new InMemoryCache(),
-                    link: httpLink.create({
-                        uri: 'https://api-staging.csgoroll.com/graphql',
-                        withCredentials: true
-                    })
+                    link
                 };
             }
         }
