@@ -19,8 +19,13 @@ const authFeature = createFeature({
         on(AuthActions.csgoLoginSuccess, (state) => ({
             ...state,
             loggedIn: true
+        })),
+        on(AuthActions.fetchedUserSuccess, (state, { user }) => ({
+            ...state,
+            user
         }))
     )
 });
 
-export const { name, reducer, selectAuthState, selectLoggedIn } = authFeature;
+export const { name, reducer, selectAuthState, selectLoggedIn, selectUser } =
+    authFeature;

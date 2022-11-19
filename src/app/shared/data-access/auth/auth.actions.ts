@@ -8,5 +8,5 @@ export const csgoLoginSuccess = createAction('[Auth API] CSGO Login Success');
 
 export const fetchedUserSuccess = createAction(
     '[Auth API] Fetched User Success',
-    props<{ user: User; wallets: Wallet[] }>
+    props<{ user: User; wallets: Wallet[] }>()
 );
