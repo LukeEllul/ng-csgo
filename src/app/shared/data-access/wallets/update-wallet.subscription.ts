@@ -5,7 +5,7 @@ interface UpdateWallet {
     wallet: {
         id: string;
         amount: number;
-        name: string;
+        currency: string;
     };
 }
 
@@ -23,7 +23,7 @@ export class UpdateWalletGQL extends Subscription<Response> {
                 wallet {
                     id
                     amount
-                    name
+                    currency
                 }
             }
         }
