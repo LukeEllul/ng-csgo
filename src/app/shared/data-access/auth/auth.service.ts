@@ -6,5 +6,12 @@ import { Injectable } from '@angular/core';
 export class AuthService {
     constructor() {}
 
-    login(): void {}
+    csgoLogin(): void {
+        window.location.href =
+            'https://api-staging.csgoroll.com/auth/steam?redirectUri=http://localhost:4200';
+    }
+
+    isCsgoLoggedIn(): boolean {
+        return Boolean(document.cookie);
+    }
 }

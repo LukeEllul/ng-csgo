@@ -6,11 +6,16 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { AppComponent } from './app.component';
 
-import * as app from './shared/data-access/app.reducer';
+import * as store from './shared/data-access/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, StoreModule.forRoot(app.reducer)],
+    imports: [
+        BrowserModule,
+        StoreModule.forRoot(store.reducer),
+        EffectsModule.forRoot(store.effects)
+    ],
     providers: [
         {
             provide: APOLLO_OPTIONS,

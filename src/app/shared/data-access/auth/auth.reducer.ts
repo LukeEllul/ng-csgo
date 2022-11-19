@@ -1,4 +1,5 @@
-import { createFeature, createReducer } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
+import * as AuthActions from './auth.actions';
 
 export interface State {
     loggedIn: boolean;
@@ -10,7 +11,10 @@ export const initialState: State = {
 
 const authFeature = createFeature({
     name: 'auth',
-    reducer: createReducer(initialState)
+    reducer: createReducer(
+        initialState,
+        on(AuthActions.csgoLoginSuccess, () => ({ loggedIn: true }))
+    )
 });
 
 export const { name, reducer, selectAuthState, selectLoggedIn } = authFeature;
