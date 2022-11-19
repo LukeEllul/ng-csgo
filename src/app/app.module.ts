@@ -11,7 +11,7 @@ import * as store from './shared/data-access/store';
 import { EffectsModule } from '@ngrx/effects';
 import { getMainDefinition } from '@apollo/client/utilities';
 
-import { HeaderModule } from './header/header.module';
+import { HeaderModule } from './header/feature/header.module';
 
 @NgModule({
     declarations: [AppComponent],
