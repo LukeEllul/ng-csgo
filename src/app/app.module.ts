@@ -28,7 +28,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
                 });
 
                 const ws = new WebSocketLink({
-                    uri: 'ws://api-staging.csgoroll.com/graphql',
+                    uri: 'wss://api-staging.csgoroll.com/graphql',
                     options: {
                         reconnect: true,
                         connectionParams: {
