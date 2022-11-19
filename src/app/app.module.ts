@@ -11,12 +11,15 @@ import * as store from './shared/data-access/store';
 import { EffectsModule } from '@ngrx/effects';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+import { HeaderModule } from './header/header.module';
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
         StoreModule.forRoot(store.reducer),
-        EffectsModule.forRoot(store.effects)
+        EffectsModule.forRoot(store.effects),
+        HeaderModule
     ],
     providers: [
         {
