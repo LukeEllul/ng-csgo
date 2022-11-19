@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { StoreModule } from '@ngrx/store';
-import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { HeaderModule } from './header/feature/header.module';
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+        ApolloModule,
+        HttpClientModule,
         StoreModule.forRoot(store.reducer),
         EffectsModule.forRoot(store.effects),
         HeaderModule
@@ -58,7 +61,8 @@ import { HeaderModule } from './header/feature/header.module';
                     cache: new InMemoryCache(),
                     link
                 };
-            }
+            },
+            deps: [HttpLink]
         }
     ],
     bootstrap: [AppComponent]
