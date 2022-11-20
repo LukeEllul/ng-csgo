@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    OnInit,
+    Output
+} from '@angular/core';
 
 @Component({
     selector: 'app-logo',
@@ -7,6 +13,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogoComponent implements OnInit {
+    @Output() click = new EventEmitter();
+
     constructor() {}
 
     ngOnInit(): void {}

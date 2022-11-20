@@ -4,6 +4,7 @@ import { combineLatest } from 'rxjs';
 import * as auth from '../../shared/data-access/auth/auth.reducer';
 import * as AuthActions from '../../shared/data-access/auth/auth.actions';
 import { selectBalance } from '../data-access/header.selectors';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -22,13 +23,17 @@ export class HeaderComponent implements OnInit {
         userLoading: this.userLoading$
     });
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private router: Router) {}
 
     ngOnInit(): void {}
 
-    login(): void {
+    onClickLogin(): void {
         this.store.dispatch(AuthActions.csgoLogin());
     }
 
-    logout(): void {}
+    onClickLogout(): void {}
+
+    onClickHome() {
+        this.router.navigate(['/home']);
+    }
 }
