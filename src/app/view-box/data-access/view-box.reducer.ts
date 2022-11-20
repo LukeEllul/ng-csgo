@@ -7,12 +7,14 @@ interface State {
     loading: boolean;
     viewBox: Box | null;
     boxOpenings: BoxOpening[];
+    error: string | null;
 }
 
 const initialState: State = {
     loading: false,
     viewBox: null,
-    boxOpenings: []
+    boxOpenings: [],
+    error: null
 };
 
 export const viewBoxFeature = createFeature({
@@ -22,12 +24,14 @@ export const viewBoxFeature = createFeature({
         on(ViewBoxActions.fetchViewBox, () => ({
             loading: true,
             viewBox: null,
-            boxOpenings: []
+            boxOpenings: [],
+            error: null
         })),
         on(ViewBoxActions.fetchViewBoxSuccess, (_, { viewBox }) => ({
             loading: false,
             viewBox,
-            boxOpenings: []
+            boxOpenings: [],
+            error: null
         })),
         on(ViewBoxActions.openBox, (state) => ({
             ...state,
@@ -38,6 +42,12 @@ export const viewBoxFeature = createFeature({
             ...state,
             loading: false,
             boxOpenings
+        })),
+        on(ViewBoxActions.openBoxError, (_, { message }) => ({
+            loading: false,
+            boxOpenings: [],
+            viewBox: null,
+            error: message
         }))
     )
 });
@@ -48,5 +58,6 @@ export const {
     selectLoading,
     selectViewBox,
     selectViewBoxState,
-    selectBoxOpenings
+    selectBoxOpenings,
+    selectError
 } = viewBoxFeature;

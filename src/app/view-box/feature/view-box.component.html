@@ -12,4 +12,6 @@
     ></app-item-variant>
 
     <app-loader *ngIf="vm.loading"></app-loader>
+
+    <app-error *ngIf="vm.error" [error]="vm.error"></app-error>
 </div>

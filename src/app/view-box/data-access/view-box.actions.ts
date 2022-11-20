@@ -21,3 +21,8 @@ export const openBoxSuccess = createAction(
     '[View Box API] Open Box Success',
     props<{ boxOpenings: BoxOpening[] }>()
 );
+
+export const openBoxError = createAction(
+    '[View Box API] Open Box Error',
+    props<{ message: string }>()
+);

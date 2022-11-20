@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap, throwError } from 'rxjs';
 import { ViewBoxGQL } from './view-box.query';
 import * as ViewBoxActions from './view-box.actions';
 import { OpenBoxGQL } from './open-box.mutation';
@@ -35,6 +35,11 @@ export class ViewBoxEffects {
                         }
                     })
                     .pipe(
+                        tap(
+                            ({ errors }) =>
+                                errors &&
+                                throwError(() => new Error(errors[0].message))
+                        ),
                         map(({ data }) =>
                             ViewBoxActions.openBoxSuccess({
                                 boxOpenings: (
@@ -44,6 +49,9 @@ export class ViewBoxEffects {
                                     itemVariant
                                 }))
                             })
+                        ),
+                        catchError((err) =>
+                            of(ViewBoxActions.openBoxError({ message: err }))
                         )
                     )
             )

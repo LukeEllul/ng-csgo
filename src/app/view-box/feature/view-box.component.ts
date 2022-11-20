@@ -17,11 +17,13 @@ export class ViewBoxComponent implements OnInit {
     private viewBox$ = this.store.select(viewBox.selectViewBox);
     private loading$ = this.store.select(viewBox.selectLoading);
     private winningItem$ = this.store.select(selectWinningItem);
+    private error$ = this.store.select(viewBox.selectError);
 
     vm$ = combineLatest({
         viewBox: this.viewBox$,
         loading: this.loading$,
-        winningItem: this.winningItem$
+        winningItem: this.winningItem$,
+        error: this.error$
     });
 
     constructor(private store: Store, private route: ActivatedRoute) {}
