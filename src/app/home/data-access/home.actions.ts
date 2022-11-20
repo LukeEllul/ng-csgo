@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Box } from './models/box.model';
+import { Box } from '../../shared/data-access/models/box.model';
 
 export const fetchBoxes = createAction('[Home] Fetch Boxes');
 

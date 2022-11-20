@@ -6,7 +6,7 @@ import {
     OnInit,
     Output
 } from '@angular/core';
-import { Box } from '../../data-access/models/box.model';
+import { Box } from '../../../shared/data-access/models/box.model';
 
 const defaultBox: Box = {
     id: '',

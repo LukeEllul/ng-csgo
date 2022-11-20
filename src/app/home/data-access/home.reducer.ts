@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import * as HomeActions from './home.actions';
-import { Box } from './models/box.model';
+import { Box } from '../../shared/data-access/models/box.model';
 
 interface State {
     loading: boolean;
