@@ -4,6 +4,8 @@ import * as viewBox from '../data-access/view-box.reducer';
 import * as ViewBoxActions from '../data-access/view-box.actions';
 import { ActivatedRoute } from '@angular/router';
 import { Box } from '../../shared/data-access/models/box.model';
+import { selectWinningItem } from '../data-access/view-box.selectors';
+import { combineLatest } from 'rxjs';
 
 @Component({
     selector: 'app-view-box',
@@ -12,9 +14,15 @@ import { Box } from '../../shared/data-access/models/box.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewBoxComponent implements OnInit {
-    viewBox$ = this.store.select(viewBox.selectViewBox);
-    loading$ = this.store.select(viewBox.selectLoading);
-    boxOpenings$ = this.store.select(viewBox.selectBoxOpenings);
+    private viewBox$ = this.store.select(viewBox.selectViewBox);
+    private loading$ = this.store.select(viewBox.selectLoading);
+    private winningItem$ = this.store.select(selectWinningItem);
+
+    vm$ = combineLatest({
+        viewBox: this.viewBox$,
+        loading: this.loading$,
+        winningItem: this.winningItem$
+    });
 
     constructor(private store: Store, private route: ActivatedRoute) {}
 

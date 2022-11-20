@@ -1,5 +1,15 @@
-<app-detailed-box
-    *ngIf="viewBox$ | async as detailedBox"
-    [detailedBox]="detailedBox"
-    (clickOpen)="onClickOpen($event)"
-></app-detailed-box>
+<div *ngIf="vm$ | async as vm" class="container w-full mx-auto">
+    <app-detailed-box
+        *ngIf="!vm.loading && !vm.winningItem && vm.viewBox"
+        [detailedBox]="vm.viewBox"
+        (clickOpen)="onClickOpen($event)"
+    ></app-detailed-box>
+
+    <app-item-variant
+        *ngIf="!vm.loading && vm.winningItem"
+        [name]="vm.winningItem.name"
+        [value]="vm.winningItem.value"
+    ></app-item-variant>
+
+    <p *ngIf="vm.loading">Loading...</p>
+</div>

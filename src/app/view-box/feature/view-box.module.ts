@@ -7,6 +7,7 @@ import { viewBoxFeature } from '../data-access/view-box.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ViewBoxEffects } from '../data-access/view-box.effects';
 import { DetailedBoxModule } from '../ui/detailed-box/detailed-box.module';
+import { ItemVariantModule } from '../ui/item-variant/item-variant.module';
 
 @NgModule({
     declarations: [ViewBoxComponent],
@@ -15,7 +16,8 @@ import { DetailedBoxModule } from '../ui/detailed-box/detailed-box.module';
         ViewBoxRoutingModule,
         StoreModule.forFeature(viewBoxFeature),
         EffectsModule.forFeature([ViewBoxEffects]),
-        DetailedBoxModule
+        DetailedBoxModule,
+        ItemVariantModule
     ]
 })
 export class ViewBoxModule {}
