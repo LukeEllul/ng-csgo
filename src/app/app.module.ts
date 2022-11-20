@@ -14,6 +14,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 import { HeaderModule } from './header/feature/header.module';
 import { AppRoutingModule } from './app-routing.module';
+import { LoaderModule } from './shared/ui/loader/loader.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
         StoreModule.forRoot(store.reducer),
         EffectsModule.forRoot(store.effects),
         AppRoutingModule,
-        HeaderModule
+        HeaderModule,
+        LoaderModule
     ],
     providers: [
         {
