@@ -12,7 +12,7 @@ interface CurrentUser {
 }
 
 interface Response {
-    currentUser: CurrentUser;
+    currentUser: CurrentUser | null;
 }
 
 @Injectable({

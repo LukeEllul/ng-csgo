@@ -3,12 +3,12 @@ import { User } from '../models/user.model';
 import * as AuthActions from './auth.actions';
 
 export interface State {
-    loggedIn: boolean;
+    loading: boolean;
     user: User | null;
 }
 
 export const initialState: State = {
-    loggedIn: false,
+    loading: false,
     user: null
 };
 
@@ -16,16 +16,20 @@ const authFeature = createFeature({
     name: 'auth',
     reducer: createReducer(
         initialState,
-        on(AuthActions.csgoLoginSuccess, (state) => ({
-            ...state,
-            loggedIn: true
+        on(AuthActions.fetchUser, () => ({
+            loading: true,
+            user: null
         })),
-        on(AuthActions.fetchedUserSuccess, (state, { user }) => ({
-            ...state,
+        on(AuthActions.fetchedUserSuccess, (_, { user }) => ({
+            loading: false,
             user
+        })),
+        on(AuthActions.fetchUserError, () => ({
+            loading: false,
+            user: null
         }))
     )
 });
 
-export const { name, reducer, selectAuthState, selectLoggedIn, selectUser } =
+export const { name, reducer, selectAuthState, selectUser, selectLoading } =
     authFeature;

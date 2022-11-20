@@ -3,7 +3,6 @@ import { ActionReducerMap } from '@ngrx/store';
 import * as auth from './auth/auth.reducer';
 import * as wallets from './wallets/wallets.reducer';
 
-import { AppEffects } from './app/app.effects';
 import { AuthEffects } from './auth/auth.effects';
 import { WalletsEffects } from './wallets/wallets.effects';
 
@@ -22,4 +21,4 @@ export const reducer: ActionReducerMap<RootState> = {
     wallets: wallets.reducer
 };
 
-export const effects = [AppEffects, AuthEffects, WalletsEffects];
+export const effects = [AuthEffects, WalletsEffects];

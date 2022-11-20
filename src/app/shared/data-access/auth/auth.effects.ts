@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs';
+import { EMPTY, map, of, switchMap, tap } from 'rxjs';
 import * as AuthActions from './auth.actions';
 import { AuthService } from './auth.service';
 import { CurrentUserGQL } from './current-user.query';
@@ -14,19 +14,21 @@ export class AuthEffects {
         )
     );
 
-    csgoLoginSuccess$ = createEffect(() =>
+    fetchUser$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(AuthActions.csgoLoginSuccess),
+            ofType(AuthActions.fetchUser),
             switchMap(() =>
                 this.currentUserGQL.fetch().pipe(
                     map(({ data: { currentUser } }) =>
-                        AuthActions.fetchedUserSuccess({
-                            user: {
-                                id: currentUser.id,
-                                name: currentUser.name
-                            },
-                            wallets: currentUser.wallets
-                        })
+                        currentUser
+                            ? AuthActions.fetchedUserSuccess({
+                                  user: {
+                                      id: currentUser.id,
+                                      name: currentUser.name
+                                  },
+                                  wallets: currentUser.wallets
+                              })
+                            : AuthActions.fetchUserError()
                     )
                 )
             )
