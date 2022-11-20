@@ -8,6 +8,13 @@ const routes: Routes = [
             import('./home/feature/home.module').then((m) => m.HomeModule)
     },
     {
+        path: 'view-box/:id',
+        loadChildren: () =>
+            import('./view-box/feature/view-box.module').then(
+                (m) => m.ViewBoxModule
+            )
+    },
+    {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
