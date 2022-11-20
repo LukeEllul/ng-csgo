@@ -11,4 +11,9 @@ export const fetchedUserSuccess = createAction(
     props<{ user: User; wallets: Wallet[] }>()
 );
 
-export const fetchUserError = createAction('[Auth API] Fetch User Error');
+export const fetchUserError = createAction(
+    '[Auth API] Fetch User Error',
+    props<{ message: string }>()
+);
+
+export const userNotLogged = createAction('[Auth API] User not logged');

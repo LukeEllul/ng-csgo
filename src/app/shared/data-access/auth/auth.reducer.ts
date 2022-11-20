@@ -5,11 +5,13 @@ import * as AuthActions from './auth.actions';
 export interface State {
     loading: boolean;
     user: User | null;
+    error: string | null;
 }
 
 export const initialState: State = {
     loading: false,
-    user: null
+    user: null,
+    error: null
 };
 
 const authFeature = createFeature({
@@ -18,18 +20,32 @@ const authFeature = createFeature({
         initialState,
         on(AuthActions.fetchUser, () => ({
             loading: true,
-            user: null
+            user: null,
+            error: null
         })),
         on(AuthActions.fetchedUserSuccess, (_, { user }) => ({
             loading: false,
-            user
+            user,
+            error: null
         })),
-        on(AuthActions.fetchUserError, () => ({
+        on(AuthActions.fetchUserError, (_, { message }) => ({
             loading: false,
-            user: null
+            user: null,
+            error: message
+        })),
+        on(AuthActions.userNotLogged, () => ({
+            loading: false,
+            user: null,
+            error: null
         }))
     )
 });
 
-export const { name, reducer, selectAuthState, selectUser, selectLoading } =
-    authFeature;
+export const {
+    name,
+    reducer,
+    selectAuthState,
+    selectUser,
+    selectLoading,
+    selectError
+} = authFeature;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, tap, throwError } from 'rxjs';
 import * as AuthActions from './auth.actions';
 import { AuthService } from './auth.service';
 import { CurrentUserGQL } from './current-user.query';
@@ -19,6 +19,11 @@ export class AuthEffects {
             ofType(AuthActions.fetchUser),
             switchMap(() =>
                 this.currentUserGQL.fetch().pipe(
+                    tap(
+                        ({ errors }) =>
+                            errors &&
+                            throwError(() => new Error(errors[0].message))
+                    ),
                     map(({ data: { currentUser } }) =>
                         currentUser
                             ? AuthActions.fetchedUserSuccess({
@@ -28,7 +33,10 @@ export class AuthEffects {
                                   },
                                   wallets: currentUser.wallets
                               })
-                            : AuthActions.fetchUserError()
+                            : AuthActions.userNotLogged()
+                    ),
+                    catchError((err) =>
+                        of(AuthActions.fetchUserError({ message: err }))
                     )
                 )
             )

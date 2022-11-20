@@ -10,12 +10,13 @@
     </div>
     <div class="basis-1/3 grid">
         <app-balance *ngIf="vm.user" [balance]="vm.balance"></app-balance>
+        <app-error *ngIf="vm.error" [error]="vm.error"></app-error>
     </div>
     <div class="basis-1/3">
         <button
             *ngIf="!vm.user"
             class="float-right rounded-md bg-sky-500 text-white shadow-sm px-4 py-2"
-            [disabled]="vm.userLoading"
+            [disabled]="vm.userLoading || vm.error"
             (click)="onClickLogin()"
         >
             Login

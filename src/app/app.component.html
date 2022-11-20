@@ -5,5 +5,7 @@
 
     <app-loader *ngIf="vm.userLoading"></app-loader>
 
-    <p *ngIf="!vm.user && !vm.userLoading">Please Login</p>
+    <p *ngIf="!vm.user && !vm.userLoading" class="text-center mt-80 text-3xl">
+        Please Login
+    </p>
 </ng-container>

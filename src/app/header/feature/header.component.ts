@@ -16,11 +16,13 @@ export class HeaderComponent implements OnInit {
     private balance$ = this.store.select(selectBalance);
     private user$ = this.store.select(auth.selectUser);
     private userLoading$ = this.store.select(auth.selectLoading);
+    private error$ = this.store.select(auth.selectError);
 
     vm$ = combineLatest({
         balance: this.balance$,
         user: this.user$,
-        userLoading: this.userLoading$
+        userLoading: this.userLoading$,
+        error: this.error$
     });
 
     constructor(private store: Store, private router: Router) {}
@@ -30,8 +32,6 @@ export class HeaderComponent implements OnInit {
     onClickLogin(): void {
         this.store.dispatch(AuthActions.csgoLogin());
     }
-
-    onClickLogout(): void {}
 
     onClickHome() {
         this.router.navigate(['/home']);
