@@ -12,7 +12,7 @@ export class HomeEffects {
         this.actions$.pipe(
             ofType(HomeActions.fetchBoxes),
             concatLatestFrom(() => this.store.select(home.selectBoxes)),
-            filter(([_, boxes]) => boxes.length > 0),
+            filter(([_, boxes]) => boxes.length === 0),
             switchMap(() =>
                 this.boxesGQL.fetch().pipe(
                     map(({ data: { boxes } }) =>

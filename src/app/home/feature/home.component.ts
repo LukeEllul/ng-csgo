@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as HomeActions from '../data-access/home.actions';
+import * as home from '../data-access/home.reducer';
 
 @Component({
     selector: 'app-home',
@@ -7,7 +11,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
-    constructor() {}
+    boxes$ = this.store.select(home.selectBoxes);
+    loading$ = this.store.select(home.selectLoading);
 
-    ngOnInit(): void {}
+    constructor(private store: Store) {}
+
+    ngOnInit(): void {
+        this.store.dispatch(HomeActions.fetchBoxes());
+    }
 }

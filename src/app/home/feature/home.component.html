@@ -1,1 +1,7 @@
-<p>home works!</p>
+<div *ngIf="!(loading$ | async); else loading">
+    {{ boxes$ | async | json }}
+</div>
+
+<ng-template #loading>
+    <p>Loading boxes...</p>
+</ng-template>
