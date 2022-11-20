@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as viewBox from '../../data-access/view-box.reducer';
-import * as ViewBoxActions from '../../data-access/view-box.actions';
+import * as viewBox from '../data-access/view-box.reducer';
+import * as ViewBoxActions from '../data-access/view-box.actions';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
