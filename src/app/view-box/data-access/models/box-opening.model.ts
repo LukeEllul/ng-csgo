@@ -6,5 +6,5 @@ interface ItemVariant {
 
 export interface BoxOpening {
     id: string;
-    itemVariant: ItemVariant;
+    itemVariant: ItemVariant | null;
 }

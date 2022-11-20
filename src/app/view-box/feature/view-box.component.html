@@ -1,17 +1,5 @@
-<div
-    *ngIf="viewBox$ | async as viewBox; else loading"
-    class="container w-full mx-auto"
->
-    <img [src]="viewBox.iconUrl" class="mx-auto mt-8 h-80 w-80" />
-    <p class="text-4xl text-center">{{ viewBox.name }}</p>
-    <p class="text-lg text-center mt-4">
-        <span class="font-bold">Cost: </span>{{ viewBox.cost | number: '1.2' }}
-    </p>
-    <div
-        class="mx-auto w-32 mt-4 text-center px-4 py-2 font-semibold text-xl bg-cyan-500 text-white rounded-full shadow-lg cursor-pointer hover:scale-125 transition duration-300 ease-in-out"
-    >
-        Open
-    </div>
-</div>
-
-<ng-template #loading> Loading View Box... </ng-template>
+<app-detailed-box
+    *ngIf="viewBox$ | async as detailedBox"
+    [detailedBox]="detailedBox"
+    (clickOpen)="onClickOpen($event)"
+></app-detailed-box>

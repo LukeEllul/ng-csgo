@@ -14,7 +14,7 @@ export const fetchViewBoxSuccess = createAction(
 
 export const openBox = createAction(
     '[View Box] Open Box',
-    props<{ id: string; amount: number }>()
+    props<{ id: string }>()
 );
 
 export const openBoxSuccess = createAction(

@@ -8,7 +8,7 @@ interface OpenBox {
             id: string;
             name: string;
             value: number;
-        };
+        } | null;
     }[];
 }
 
@@ -16,7 +16,7 @@ interface Response {
     openBox: OpenBox;
 }
 
-interface Input {
+interface OpenBoxInput {
     boxId: string;
     amount: number;
     multiplierBoxBet: number;
@@ -25,7 +25,7 @@ interface Input {
 @Injectable({
     providedIn: 'root'
 })
-export class OpenBoxGQL extends Mutation<Response, Input> {
+export class OpenBoxGQL extends Mutation<Response, { input: OpenBoxInput }> {
     override document = gql`
         mutation OpenBox($input: OpenBoxInput!) {
             openBox(input: $input) {

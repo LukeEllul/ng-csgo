@@ -47,5 +47,6 @@ export const {
     reducer,
     selectLoading,
     selectViewBox,
-    selectViewBoxState
+    selectViewBoxState,
+    selectBoxOpenings
 } = viewBoxFeature;
