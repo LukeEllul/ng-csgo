@@ -17,7 +17,7 @@ interface Response {
 })
 export class ViewBoxGQL extends Query<Response> {
     override document = gql`
-        query GetViewBox($id: Int!) {
+        query GetViewBox($id: ID!) {
             box(id: $id) {
                 id
                 name

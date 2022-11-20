@@ -23,6 +23,6 @@ export class HomeComponent implements OnInit {
     }
 
     onClickBox(box: Box): void {
-        this.router.navigate(['/view-box', { id: box.id }]);
+        this.router.navigate(['/view-box', box.id]);
     }
 }
