@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { getMainDefinition } from '@apollo/client/utilities';
 
 import { HeaderModule } from './header/feature/header.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { HeaderModule } from './header/feature/header.module';
         HttpClientModule,
         StoreModule.forRoot(store.reducer),
         EffectsModule.forRoot(store.effects),
+        AppRoutingModule,
         HeaderModule
     ],
     providers: [
