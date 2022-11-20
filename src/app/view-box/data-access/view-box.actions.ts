@@ -10,3 +10,8 @@ export const fetchViewBoxSuccess = createAction(
     '[View Box API] Fetch View Box Success',
     props<{ viewBox: Box }>()
 );
+
+export const openBox = createAction(
+    '[View Box] Open Box',
+    props<{ id: string; amount: number }>()
+);
