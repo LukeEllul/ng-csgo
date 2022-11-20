@@ -1,5 +1,12 @@
-<div *ngIf="!(loading$ | async); else loading">
-    {{ boxes$ | async | json }}
+<div
+    *ngIf="!(loading$ | async); else loading"
+    class="w-full container mx-auto grid grid-cols-3 gap-9 mt-11"
+>
+    <app-box
+        *ngFor="let box of boxes$ | async"
+        [box]="box"
+        class="ml-auto mr-auto"
+    ></app-box>
 </div>
 
 <ng-template #loading>

@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { homeFeature } from '../data-access/home.reducer';
 import { HomeEffects } from '../data-access/home.effects';
+import { BoxModule } from '../ui/box/box.module';
 
 @NgModule({
     declarations: [HomeComponent],
@@ -13,7 +14,8 @@ import { HomeEffects } from '../data-access/home.effects';
         CommonModule,
         HomeRoutingModule,
         StoreModule.forFeature(homeFeature),
-        EffectsModule.forFeature([HomeEffects])
+        EffectsModule.forFeature([HomeEffects]),
+        BoxModule
     ]
 })
 export class HomeModule {}

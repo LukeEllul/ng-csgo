@@ -4,6 +4,7 @@ import { BoxComponent } from './box.component';
 
 @NgModule({
     declarations: [BoxComponent],
-    imports: [CommonModule]
+    imports: [CommonModule],
+    exports: [BoxComponent]
 })
 export class BoxModule {}
