@@ -36,7 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
                 });
 
                 const ws = new WebSocketLink({
-                    uri: 'wss://api-staging.csgoroll.com/graphql',
+                    uri: 'ws://api-staging.csgoroll.com/graphql',
                     options: {
                         reconnect: true,
                         connectionParams: {

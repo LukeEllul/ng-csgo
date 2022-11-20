@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, switchMap } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs';
 import * as AuthActions from '../auth/auth.actions';
 import { Wallet } from '../models/wallet.model';
 import { UpdateWalletGQL } from './update-wallet.subscription';
@@ -13,6 +13,7 @@ export class WalletsEffects {
             ofType(AuthActions.fetchedUserSuccess),
             switchMap(() =>
                 this.updateWalletGQL.subscribe().pipe(
+                    tap((data) => console.log(data)),
                     filter(({ data }) => Boolean(data?.updateWallet.wallet)),
                     map(({ data }) =>
                         WalletsActions.walletUpdated({
