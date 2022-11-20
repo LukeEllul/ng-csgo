@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output
+} from '@angular/core';
 import { Box } from '../../data-access/models/box.model';
 
 const defaultBox: Box = {
@@ -11,10 +18,13 @@ const defaultBox: Box = {
 @Component({
     selector: 'app-box',
     templateUrl: './box.component.html',
-    styleUrls: ['./box.component.scss']
+    styleUrls: ['./box.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoxComponent implements OnInit {
     @Input() box: Box = defaultBox;
+
+    @Output() click = new EventEmitter<Box>();
 
     constructor() {}
 
