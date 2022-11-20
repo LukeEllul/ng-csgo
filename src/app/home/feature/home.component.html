@@ -6,6 +6,7 @@
         *ngFor="let box of boxes$ | async"
         [box]="box"
         class="ml-auto mr-auto"
+        (click)="onClickBox($event)"
     ></app-box>
 </div>
 
