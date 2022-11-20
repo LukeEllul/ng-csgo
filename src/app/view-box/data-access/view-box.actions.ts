@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Box } from '../../shared/data-access/models/box.model';
+import { BoxOpening } from './models/box-opening.model';
 
 export const fetchViewBox = createAction(
     '[View Box] Fetch View Box',
@@ -14,4 +15,9 @@ export const fetchViewBoxSuccess = createAction(
 export const openBox = createAction(
     '[View Box] Open Box',
     props<{ id: string; amount: number }>()
+);
+
+export const openBoxSuccess = createAction(
+    '[View Box API] Open Box Success',
+    props<{ boxOpenings: BoxOpening[] }>()
 );

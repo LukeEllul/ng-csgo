@@ -5,6 +5,7 @@ import { map, of, switchMap } from 'rxjs';
 import { ViewBoxGQL } from './view-box.query';
 import * as ViewBoxActions from './view-box.actions';
 import * as home from '../../home/data-access/home.reducer';
+import { OpenBoxGQL } from './open-box.mutation';
 
 @Injectable()
 export class ViewBoxEffects {
@@ -32,9 +33,36 @@ export class ViewBoxEffects {
         )
     );
 
+    openBox$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ViewBoxActions.openBox),
+            switchMap((action) =>
+                this.openBoxGQL
+                    .mutate({
+                        boxId: action.id,
+                        amount: action.amount,
+                        multiplierBoxBet: 1
+                    })
+                    .pipe(
+                        map(({ data }) =>
+                            ViewBoxActions.openBoxSuccess({
+                                boxOpenings: (
+                                    data?.openBox.boxOpenings ?? []
+                                ).map(({ id, itemVariant }) => ({
+                                    id,
+                                    itemVariant
+                                }))
+                            })
+                        )
+                    )
+            )
+        )
+    );
+
     constructor(
         private actions$: Actions,
         private store: Store,
-        private viewBoxGQL: ViewBoxGQL
+        private viewBoxGQL: ViewBoxGQL,
+        private openBoxGQL: OpenBoxGQL
     ) {}
 }
