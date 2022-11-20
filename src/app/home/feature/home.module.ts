@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { homeFeature } from '../data-access/home.reducer';
 import { HomeEffects } from '../data-access/home.effects';
 import { BoxModule } from '../ui/box/box.module';
+import { LoaderModule } from '../../shared/ui/loader/loader.module';
 
 @NgModule({
     declarations: [HomeComponent],
@@ -15,7 +16,8 @@ import { BoxModule } from '../ui/box/box.module';
         HomeRoutingModule,
         StoreModule.forFeature(homeFeature),
         EffectsModule.forFeature([HomeEffects]),
-        BoxModule
+        BoxModule,
+        LoaderModule
     ]
 })
 export class HomeModule {}

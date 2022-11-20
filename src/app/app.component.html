@@ -1,10 +1,9 @@
 <app-header></app-header>
 
-<app-loader></app-loader>
-
 <ng-container *ngIf="vm$ | async as vm">
     <router-outlet *ngIf="vm.user"></router-outlet>
 
-    <p *ngIf="vm.userLoading">Loading...</p>
+    <app-loader *ngIf="vm.userLoading"></app-loader>
+
     <p *ngIf="!vm.user && !vm.userLoading">Please Login</p>
 </ng-container>
