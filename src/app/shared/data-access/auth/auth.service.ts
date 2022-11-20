@@ -10,8 +10,4 @@ export class AuthService {
         window.location.href =
             'https://api-staging.csgoroll.com/auth/steam?redirectUri=http://localhost:4200';
     }
-
-    isCsgoLoggedIn(): boolean {
-        return Boolean(document.cookie);
-    }
 }

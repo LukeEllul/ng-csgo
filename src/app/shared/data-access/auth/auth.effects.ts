@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, map, of, switchMap, tap } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs';
 import * as AuthActions from './auth.actions';
 import { AuthService } from './auth.service';
 import { CurrentUserGQL } from './current-user.query';
